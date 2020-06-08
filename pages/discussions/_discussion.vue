@@ -4,7 +4,10 @@
 		<TheDiscussionPosts />
 		<!-- New Post -->
 		<div class="mt-8">
-			<template v-if="$auth.loggedIn">
+			<template v-if="discussion.isClosed">
+				<Alert icon="info">This discussion is closed. It cannot accept replies anymore.</Alert>
+			</template>
+			<template v-else-if="$auth.loggedIn">
 				<NewPost />
 			</template>
 			<template v-else>
@@ -19,6 +22,7 @@
 </template>
 
 <script>
+	import Alert from '~/components/Alert'
 	import TheDiscussion from '~/components/Discussions/TheDiscussion'
 	import NewPost from '~/components/Posts/NewPost'
 	import TheDiscussionPosts from '~/components/Posts/TheDiscussionPosts'
@@ -27,7 +31,8 @@
 		components: {
 			TheDiscussion,
 			TheDiscussionPosts,
-			NewPost
+			NewPost,
+			Alert,
 		},
 		computed: {
 			...mapGetters({

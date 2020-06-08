@@ -3,6 +3,13 @@
 		<template v-if="loading">
 			<div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-500 h-8 w-8 mr-3"></div>
 		</template>
+		<template v-if="icon != 'none'">
+			<template v-if="icon == 'info'">
+				<div class="mr-3" :class="text">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="fill-current"><path class="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9a1 1 0 0 1 1 1v4a1 1 0 0 1-2 0v-4a1 1 0 0 1 1-1zm0-4a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+				</div>
+			</template>
+		</template>
 		<div class="flex w-full justify-between">
 			<div class="font-bold text-sm" :class="text">
 				{{ content }}
@@ -55,6 +62,11 @@
 				type: Number,
 				required: false,
 				default: 0
+			},
+			icon: {
+				type: String, 
+				required:false,
+				default: 'none'
 			}
 		},
 		computed: {

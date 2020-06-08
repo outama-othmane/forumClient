@@ -32,18 +32,14 @@
 					&nbsp;
 					{{ (post.votes_count > 0) ? post.votes_count : '' }}
 				</a>
-				<template v-if="$auth.loggedIn">
+				<template v-if="$auth.loggedIn && !discussion.isClosed">
 					<!-- <a href="#" class="text-gray-600 font-bold text-xs transition-all duration-200 ease-in-out hover:text-gray-900">
 						Replay
 					</a> -->
-					<template v-if="true==true">
-						<a href="#" class="text-gray-600 font-bold text-xs transition-all duration-200 ease-in-out hover:text-gray-900 ml-3">
-							Mark as the answer
-						</a> 
-					</template>
 					<template v-if="user.canEdit">
 						<a href="#" class="ml-3 text-gray-600 font-bold text-xs transition-all duration-200 ease-in-out hover:text-gray-900" @click.prevent="edit">
-							Edit
+							<template v-if="editing">Close editing</template>
+							<template v-else>Edit</template>
 						</a>
 					</template>
 					<template v-if="user.canDelete">
@@ -60,6 +56,7 @@
 <script>
 	import { EventBus } from '~/plugins/event-bus'
 	import EditPost from '~/components/Posts/EditPost'
+	import { mapGetters } from 'vuex'
 	export default {
 		data() {
 			return {
@@ -85,6 +82,9 @@
 	    	user() {
 	    		return this.post.user
 	    	},
+	    	...mapGetters({
+	    		discussion: 'currentDiscussion'
+	    	})
 	    },
 
 	    methods: {
