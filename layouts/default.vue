@@ -7,7 +7,7 @@
         <section class="w-full md:w-4/5 relative">
           <!-- keep-alive  -->
           <nuxt keep-alive/>
-        </section>
+        </section> 
       </div>
     </div>
   </div>

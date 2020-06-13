@@ -1,9 +1,9 @@
 <template>
 	<div class="w-full pt-10 md:pt-20 pr-12 pb-5 pl-12">
 		<template v-if="$fetchState.pending">
-			<ShadowDiscussion />
+			<ShadowTheDiscussion />
 		</template>
-		<template v-else>
+		<template v-else-if="discussion.title">
 			<TheDiscussion :discussion="discussion" />
 			<TheDiscussionPosts />
 			<!-- New Post -->
@@ -27,11 +27,12 @@
 </template>
 
 <script>
+	import { EventBus } from '~/plugins/event-bus'
 	import Alert from '~/components/Cards/Alert'
 	import TheDiscussion from '~/components/Discussions/TheDiscussion'
 	import NewPost from '~/components/Posts/NewPost'
 	import TheDiscussionPosts from '~/components/Posts/TheDiscussionPosts'
-	import ShadowDiscussion from '~/components/Shadows/ShadowTheDiscussion'
+	import ShadowTheDiscussion from '~/components/Shadows/ShadowTheDiscussion'
 	export default {
 		data() {
 			return {
@@ -43,14 +44,13 @@
 			TheDiscussionPosts,
 			NewPost,
 			Alert,
-			ShadowDiscussion,
+			ShadowTheDiscussion,
 		},
 		async fetch() {
 			try {
 				let discussion = await this.$axios.$get(`discussions/${this.$route.params.discussion}`)
+
 				this.discussion = discussion.data
-				// this.user = this.discussion.user
-				// this.channel = this.discussion.channels.data
 				this.$store.commit('SET_CURRENT_DISCUSSION', this.discussion)
 			} catch(e) {
 				if (e.response) {
@@ -61,7 +61,23 @@
 				}
 			}
 		},
+		activated() {
+			if (this.$fetchState.timestamp <= Date.now() - 5000) {
+				this.$fetch()
+			}
+		},
 		fetchOnServer: true,
+		methods: {
+			editDiscussion(discussion) {
+				this.discussion = discussion
+
+				this.$route.params.discussion = discussion.slug
+				history.replaceState({}, null, `/discussions/${discussion.slug}`)
+			}
+		},
+		mounted() {
+			EventBus.$on('discussions:edited', this.editDiscussion)
+		},
 		head() {
 			return {
 				title: `${this.discussion.title || 'Loading'} - Forum`

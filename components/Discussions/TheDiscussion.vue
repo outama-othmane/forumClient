@@ -1,12 +1,22 @@
 <template>
 	<div class="flex items-center justify-between pb-1 mb-4 border-b border-solid border-gray-200 flex-col sm:flex-row">
 		<div class="w-full">
-			<h3 class="m-0 tracking-tight font-medium mb-1 text-lg text-gray-900">{{ discussion.title }}</h3>
-		</div>
-		<div class="flex items-center justify-between flex-row-reverse my-2 sm:my-0">
-			<template v-if="user.canEdit">
-				<nuxt-link to="/" class="block bg-blue-400 text-white py-1 px-2 transition-all duration-200 ease-in-out text-xs ml-4 text-center w-24 rounded">Edit this discussion</nuxt-link>
+			<template v-if="!editing">
+				<h3 class="m-0 tracking-tight font-medium mb-1 text-lg text-gray-900" v-on:dblclick.prevent="edit">{{ discussion.title }}</h3>
 			</template>
+			<template v-else>
+				<div class="flex items-center justify-between">
+					<input type="text" class="block w-full text-sm border border-solid border-gray-200 rounded text-gray-900 bg-white py-2 px-4 appearance-none outline-none transition-color duration-100 ease-in-out placeholder-gray-500" v-model="form.title" />
+					<transition name="showfield">
+						<template v-if="form.title.length > 0">
+							<a href="#" class="block bg-blue-400 text-white py-1 px-2 transition-all duration-200 ease-in-out text-xs ml-4 text-center w-24 rounded" @click.prevent="submitEdit">Save</a>
+						</template>
+					</transition>
+					<a href="#" class="block border border-solid border-text-gray-500 text-gray-600 py-1 px-2 transition-all duration-200 ease-in-out text-xs ml-4 text-center w-24 rounded" @click.prevent="cancelEdit">Cancel</a>
+				</div>
+			</template>
+		</div>
+		<div class="flex items-center justify-between flex-row-reverse my-2 sm:my-0" v-if="!editing">
 			<nuxt-link :to="channelLink" class="block bg-gray-500 text-white py-1 px-2 transition-all duration-200 ease-in-out text-xs ml-4 text-center w-24 rounded">{{ channel.name }}</nuxt-link>
 			<div class="flex items-center justify-center text-gray-600 ml-4">
 	          <div class="mr-1">
@@ -19,7 +29,16 @@
 </template>
 
 <script>
+	import { EventBus } from '~/plugins/event-bus'
 	export default {
+		data() {
+			return {
+				editing: false,
+				form: {
+					title: ''
+				}
+			}
+		},
 		props: {
 			discussion: {
 				required: true,
@@ -34,15 +53,36 @@
 				return this.discussion.user || {}
 			},
 		    channelLink() {
-				return '/channels/' + this.channel.slug || ''
+				return '/channels/' + this.channel.slug || '/'
 		    },
 		},
 		methods: {
-			close() {
+			edit() {
+				if (!this.user.canEdit) return
 
+				this.form.title = this.discussion.title
+				this.editing = true
 			},
-			destroy() {
+			async submitEdit() {
+				if (this.form.title < 1 || this.form.title == this.discussion.title) return
 
+				// let discussion = Object.assign({}, this.discussion)
+				// discussion.title = this.form.title
+
+				try {
+					let response = await this.$axios.$patch(`/discussions/${this.discussion.slug}`, this.form)
+
+					this.$store.commit('SET_CURRENT_DISCUSSION', response.data)
+					
+					this.cancelEdit()
+
+					EventBus.$emit('discussions:edited', response.data)
+				} catch(e) {
+					// Error handling here
+				}
+			},
+			cancelEdit() {
+				this.editing = false
 			}
 		},
 	}

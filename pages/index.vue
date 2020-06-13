@@ -84,8 +84,7 @@ export default {
 		}
 	},
 	activated() {
-		// Call fetch again if last fetch more than 60 sec ago
-		if (this.$fetchState.timestamp <= Date.now() - 60000) {
+		if (this.$fetchState.timestamp <= Date.now() - 5000) {
 			this.$fetch()
 		}
 	},
