@@ -35,7 +35,7 @@
 <script>
 	// import { mapGetters } from 'vuex'
 	import { EventBus } from '~/plugins/event-bus'
-	import Alert from '~/components/Alert'
+	import Alert from '~/components/Cards/Alert'
 	export default {
 		data () {
 			return {

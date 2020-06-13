@@ -12,7 +12,9 @@
 				<Discussion :discussion="discussion" />
 			</template>
 			<template v-if="$fetchState.pending">
-				<ShadowDiscussion />
+				<template v-for="i in (discussions.length > 0) ? 1 : 5">
+					<ShadowDiscussion />
+				</template>
 			</template>
 		</div>
 		<template v-if="!($fetchState.pending || page == lastPage)">
@@ -33,9 +35,9 @@
 </template>
 
 <script>
-import Alert from '~/components/Alert'
+import Alert from '~/components/Cards/Alert'
 import Discussion from '~/components/Discussions/Discussion'
-import ShadowDiscussion from '~/components/Discussions/ShadowDiscussion'
+import ShadowDiscussion from '~/components/Shadows/ShadowDiscussion'
 export default {
 	data() {
 		return {

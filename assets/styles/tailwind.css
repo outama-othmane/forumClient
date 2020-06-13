@@ -69,3 +69,18 @@ body {
 button:focus{
   outline: none;
 }
+
+.vue-content-placeholders-text__line, 
+.vue-content-placeholders-img {
+      background: #e2e8f0 !important;
+}
+
+.vue-content-placeholders-is-animated .vue-content-placeholders-text__line::before,
+.vue-content-placeholders-is-animated .vue-content-placeholders-img::before {
+    background: linear-gradient(
+      to right, 
+      transparent 0%, 
+      #cbd5e0 15%, 
+      transparent 30%
+    ) !important;
+}

@@ -5,7 +5,8 @@
       <div class="relative flex justify-between mt-16">
         <Sidebar />
         <section class="w-full md:w-4/5 relative">
-          <nuxt keep-alive />
+          <!-- keep-alive  -->
+          <nuxt keep-alive/>
         </section>
       </div>
     </div>

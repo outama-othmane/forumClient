@@ -1,4 +1,5 @@
 const path = require('path')
+require('dotenv').config()
 
 export default {
   mode: 'universal',
@@ -57,7 +58,8 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'http://fresh.test/api',
+    // 'http://fresh.test/api'
+    baseURL: process.env.API_URL,
     Headers: {
       common: {
         'Accept': 'application/json'
