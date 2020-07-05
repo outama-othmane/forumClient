@@ -25,7 +25,7 @@
 							<nuxt-link to="/auth/signup" class="inline-block bg-blue-400 text-white px-3 py-2 rounded transition-all duration-200 ease-in-out hover:bg-opacity-75">Sign up</nuxt-link>
 						</template>
 						<template v-else>
-							<nuxt-link to="/" class="inline-block text-gray-500 mr-5 hover:text-gray-700">{{ $auth.user.name }}</nuxt-link>
+							<nuxt-link to="/account/edit" class="inline-block text-gray-500 mr-5 hover:text-gray-700">{{ $auth.user.name }}</nuxt-link>
 							<a href="/" @click.prevent="logout" class="inline-block text-gray-500 hover:text-gray-700">Log out</a>
 						</template>
 					</nav>

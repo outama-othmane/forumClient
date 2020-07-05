@@ -9,7 +9,7 @@
 				<form @submit.prevent="signup">
 					<div class="mb-4">
 						<label class="block font-medium text-gray-900 text-sm mb-1">Name</label>	
-						<input type="text" name="name" placeholder="name" class="block w-full text-sm border border-solid border-gray-200 rounded text-gray-900 bg-white py-2 px-4 appearance-none outline-none transition-color duration-100 ease-in-out placeholder-gray-500" :class="{'border-gray-600' : errors.name }" v-model="form.name" :autofocus="true" />
+						<input type="text" name="name" placeholder="name" class="block w-full text-sm border border-solid border-gray-200 rounded text-gray-900 bg-white py-2 px-4 appearance-none outline-none transition-color duration-100 ease-in-out placeholder-gray-500" :class="{'border-gray-600' : errors.name }" v-model="form.name" autofocus="autofocus" />
 						<template v-if="errors.name">
 							<small class="font-bold text-gray-600 text-xs">{{ errors.name[0] }}</small>
 						</template>
@@ -130,7 +130,7 @@
 		},
 		head() {
 			return {
-				title: `Sign up - Forum`
+				title: `Sign up | ${process.env.APP_NAME}`
 			}
 		}
 	}

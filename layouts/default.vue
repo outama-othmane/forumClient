@@ -6,7 +6,7 @@
         <Sidebar />
         <section class="w-full md:w-4/5 relative">
           <!-- keep-alive  -->
-          <nuxt keep-alive/>
+          <nuxt keep-alive />
         </section> 
       </div>
     </div>

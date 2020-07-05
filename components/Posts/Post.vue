@@ -20,7 +20,7 @@
 			</div>
 			<div class="">
 				<template v-if="!editing">
-					<div class="contentMark tracking-normal mb-4 text-gray-900 text-sm" v-highlightjs v-html="post.content_markdown"></div>
+					<div class="markdown-body tracking-normal mb-4 text-gray-900 text-sm" v-highlightjs v-html="post.content_markdown"></div>
 				</template>
 				<template v-else>
 					<EditPost :post="post" />
@@ -77,7 +77,7 @@
 	    		return this.post.author.data
 	    	},
 	    	authorLink() {
-	    		return ''
+	    		return '/users/' + this.author.username
 	    	},
 	    	user() {
 	    		return this.post.user

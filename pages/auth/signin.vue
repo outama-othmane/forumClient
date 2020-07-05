@@ -76,7 +76,7 @@
 		},
 		head() {
 			return {
-				title: `Sign in - Forum`
+				title: `Sign in | ${process.env.APP_NAME}`
 			}
 		}
 	}

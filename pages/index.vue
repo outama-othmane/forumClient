@@ -84,7 +84,7 @@ export default {
 		}
 	},
 	activated() {
-		if (this.$fetchState.timestamp <= Date.now() - 5000) {
+		if (this.$fetchState.timestamp <= Date.now() - process.env.CACHE_TIME) {
 			this.$fetch()
 		}
 	},
@@ -111,7 +111,7 @@ export default {
 
 	head() {
 		return {
-			title: 'Forum'
+			title: `${process.env.APP_NAME}`
 		}
 	}
 };

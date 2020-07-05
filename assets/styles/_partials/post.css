@@ -1,0 +1,3 @@
+.post:hover > div > .reaction{
+	visibility: visible;
+}

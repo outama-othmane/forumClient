@@ -62,7 +62,7 @@
 			}
 		},
 		activated() {
-			if (this.$fetchState.timestamp <= Date.now() - 5000) {
+			if (this.$fetchState.timestamp <= Date.now() - process.env.CACHE_TIME) {
 				this.$fetch()
 			}
 		},
@@ -80,7 +80,7 @@
 		},
 		head() {
 			return {
-				title: `${this.discussion.title || 'Loading'} - Forum`
+				title: `${this.discussion.title || 'Loading'} | ${process.env.APP_NAME}`
 			}
 		}
 	}

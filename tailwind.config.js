@@ -33,6 +33,9 @@ theme: {
 		minHeight: {
 			'screen-16': 'calc(100vh - 4rem)'
 		},
+		maxWidth: {
+			'32': '8rem'
+		},
 		inset: {
 			'3': '0.75rem'
 		}

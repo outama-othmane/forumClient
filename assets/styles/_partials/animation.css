@@ -1,0 +1,19 @@
+.fademe-enter-active, .fademe-leave-active {
+	transition: all .2s ease-in-out;
+  	transform: translateY(-10px);
+  /*transition: opacity .2s*/
+}
+
+.fademe-enter, .fademe-leave-active {
+  opacity: 0
+}
+
+
+.showfield-enter-active, .showfield-leave-active {
+	 opacity: 1;
+	 transition: opacity .2s
+}
+
+.showfield-enter, .showfield-leave-active {
+  opacity: 0
+}

@@ -1,5 +1,16 @@
 <template>
 	<div class="w-full pt-10 md:pt-20 pr-12 pb-5 pl-12">
+		<div class="w-full">
+			<div class="flex pb-1 mb-4 border-b border-solid border-gray-200">
+				<h3 class="m-0 tracking-tight font-medium mb-1 text-lg text-gray-900">
+					{{ 
+					filters.filter((e) => e.name == filter)[0].value 
+						 || 'Discussions' }} 
+					in 
+					{{ channelName }}
+				</h3>
+			</div>
+		</div>
 		<div>
 			<select class="inline-block text-white bg-gray-500 py-2 px-3 rounded transition-all duration-200 ease-in-out border-none outline-none text-sm" v-model="filter" v-on:change="filteredPosts">
 				<template v-for="option in filters">
@@ -95,8 +106,7 @@ export default {
 		}
 	},
 	activated() {
-		// Call fetch again if last fetch more than 60 sec ago
-		if (this.$fetchState.timestamp <= Date.now() - 60000) {
+		if (this.$fetchState.timestamp <= Date.now() - process.env.CACHE_TIME) {
 			this.$fetch()
 		}
 	},
@@ -123,7 +133,7 @@ export default {
 
 	head() {
 		return {
-			title: `${this.channelName} discussions - Forum` 
+			title: `${this.channelName || 'Loading'} discussions | ${process.env.APP_NAME}`
 		}
 	},
 };

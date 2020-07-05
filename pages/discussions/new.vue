@@ -94,7 +94,7 @@
 		},
 		head() {
 			return {
-				title: 'New discussion - Forum'
+				title: `New discussion | ${process.env.APP_NAME}`
 			}
 		}
 	}
