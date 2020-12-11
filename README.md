@@ -4,7 +4,7 @@
 Forum Client is a delightfully simple discussion interface to use **forum_api**. It has been built using NuxtJS.
 
 ## Installation
-Before you start the installation, you make sure that **npm** is installed on your computer.
+Before you start the installation make sure that **npm** is installed on your computer.
 
 ### 1. Clone the repository
 ```bash
