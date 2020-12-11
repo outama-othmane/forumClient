@@ -32,7 +32,7 @@ export const actions = {
 			let response = await this.$axios.$get('/channels?perPage=5')
 			commit('SET_CHANNELS', response.data)
 		} catch(e) {
-
+			console.log(e.response);
 		}
 	}
 }

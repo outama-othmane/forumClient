@@ -15,6 +15,13 @@
 						</template>
 					</div>
 					<div class="mb-4">
+						<label class="block font-medium text-gray-900 text-sm mb-1">Username</label>	
+						<input type="text" name="username" placeholder="Username" class="block w-full text-sm border border-solid border-gray-200 rounded text-gray-900 bg-white py-2 px-4 appearance-none outline-none transition-color duration-100 ease-in-out placeholder-gray-500" :class="{'border-gray-600' : errors.username }" v-model="form.username" autofocus="autofocus" />
+						<template v-if="errors.username">
+							<small class="font-bold text-gray-600 text-xs">{{ errors.username[0] }}</small>
+						</template>
+					</div>
+					<div class="mb-4">
 						<label class="block font-medium text-gray-900 text-sm mb-1">Email address</label>	
 						<input type="email" name="email" placeholder="email@somewhere.com" class="block w-full text-sm border border-solid border-gray-200 rounded text-gray-900 bg-white py-2 px-4 appearance-none outline-none transition-color duration-100 ease-in-out placeholder-gray-500" :class="{'border-gray-600' : errors.email }" v-model="form.email" />
 						<template v-if="errors.email">
@@ -61,6 +68,7 @@
 			return {
 				show_password: false,
 				form: {
+					username: '',
 					name: '',
 					email: '',
 					password: '',

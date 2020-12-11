@@ -2,7 +2,6 @@ const path = require('path')
 require('dotenv').config()
 
 export default {
-  mode: 'universal',
   /*
   ** Headers of the page
   */

@@ -8,7 +8,7 @@
 			<div class="rounded py-6 px-8 border border-solid border-gray-200">
 				<form @submit.prevent="signin">
 					<div class="mb-4">
-						<label class="block font-medium text-gray-900 text-sm mb-1">Email address</label>
+						<label class="block font-medium text-gray-900 text-sm mb-1">Username or email address</label>
 						<input type="email" name="email" placeholder="email@somewhere.com" class="block w-full text-sm border border-solid border-gray-200 rounded text-gray-900 bg-white py-2 px-4 appearance-none outline-none transition-color duration-100 ease-in-out placeholder-gray-500" :class="{'border-gray-600' : errors.email }" v-model="form.email" :autofocus="true" />
 						<template v-if="errors.email">
 							<small class="font-bold text-gray-600 text-xs">{{ errors.email[0] }}</small>

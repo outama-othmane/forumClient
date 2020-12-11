@@ -82,12 +82,7 @@
 					user: response.data
 				}
 			} catch (e) {
-				if (e.response) {
-					if (e.response.status === 404) 
-						this.$nuxt.error({ statusCode: 404, message: 'User not found!' })
-				} else {
-					this.$nuxt.error({ statusCode: 500, message: 'Server error!' })
-				}
+				console.log(e.response);
 			}
 		},
 		async fetch() {
