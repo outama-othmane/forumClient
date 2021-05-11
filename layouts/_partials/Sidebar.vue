@@ -10,8 +10,10 @@
 			</nav>
 			<nav class="tags">
 				<span class="block text-gray-500 font-bold uppercase mb-2 tracking-wide	text-xs">Channels</span>
-				<template v-if="channels.length" v-for="channel in channels">
-					<nuxt-link :to="(`/channels/${channel.slug}`)" class="relative block py-1 px-2 text-gray-600 text-sm font-medium transition-all duration-200 ease-in-out mb-1 hover:text-gray-900" :key="channel.id" :class="currentPage(`/channels/${channel.slug}`)">{{ channel.name }}</nuxt-link>
+				<template v-if="channels.length">
+					<template v-for="channel in channels">
+						<nuxt-link :to="(`/channels/${channel.slug}`)" class="relative block py-1 px-2 text-gray-600 text-sm font-medium transition-all duration-200 ease-in-out mb-1 hover:text-gray-900" :key="channel.id" :class="currentPage(`/channels/${channel.slug}`)">{{ channel.name }}</nuxt-link>
+					</template>
 				</template>
 				<nuxt-link to="/channels" class="relative block py-1 px-2 text-gray-600 text-sm font-medium transition-all duration-200 ease-in-out mb-1 hover:text-gray-900">See more ...</nuxt-link>
 			</nav>

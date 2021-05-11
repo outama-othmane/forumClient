@@ -14,24 +14,22 @@
 		<div>
 			<select class="inline-block text-white bg-gray-500 py-2 px-3 rounded transition-all duration-200 ease-in-out border-none outline-none text-sm" v-model="filter" v-on:change="filteredPosts">
 				<template v-for="option in filters">
-					<option :value="option.name">{{ option.value }}</option>
+					<option :value="option.name" :key="option.name">{{ option.value }}</option>
 				</template>
 			</select>
 		</div>
 		<div class="mt-8">
 			<template v-for="discussion in discussions">
-				<Discussion :discussion="discussion" />
+				<Discussion :discussion="discussion" :key="'discussion' + discussion.id" />
 			</template>
 			<template v-if="$fetchState.pending">
 				<template v-for="i in (discussions.length > 0) ? 1 : 5">
-					<ShadowDiscussion />
+					<ShadowDiscussion :key="'shadow' + i" />
 				</template>
 			</template>
 		</div>
 		<template v-if="!($fetchState.pending || page == lastPage)">
 			<div class="flex w-full justify-center mt-6">
-				<!-- <button disabled="">Prev</button> -->
-				<!-- <button>Next</button> -->
 				<a href="#" class="inline-block bg-gray-500 text-white px-3 py-2 rounded transition-all duration-200 ease-in-out hover:bg-opacity-75" @click.prevent="loadMore">Load more</a>
 			</div>
 		</template>
@@ -64,7 +62,6 @@ export default {
 				opened: 'closed=false',
 				no_posts: 'no_posts=true',
 			}
-			// randomShadows: Math.floor(Math.random() * 10) + 1,
 		}
 	},
 	components: {
@@ -100,16 +97,10 @@ export default {
 			this.discussions.push(...discussions.data)
 			this.lastPage = discussions.meta.last_page
 		} catch(e) {
-			// this.$nuxt.context.res.statusCode = 500
-			// throw new Error('Server Error!')
 			this.$nuxt.error({ statusCode: 500, message: 'Server error!' })
 		}
 	},
-	activated() {
-		if (this.$fetchState.timestamp <= Date.now() - process.env.CACHE_TIME) {
-			this.$fetch()
-		}
-	},
+	fetchOnServer: false,
 	methods: {
 		async loadMore() {
 			if (this.lastPage <= this.page) { return }

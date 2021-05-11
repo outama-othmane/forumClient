@@ -28,12 +28,11 @@ export const mutations = {
 
 export const actions = {
 	async nuxtServerInit({ commit, axios }) {
-		console.log(axios)
-		// try {
-		// 	let response = await axios.$get('/channels?perPage=5')
-		// 	commit('SET_CHANNELS', response.data)
-		// } catch(e) {
-		// 	// console.log(e);
-		// }
+		try {
+			let response = await axios.$get('/channels?perPage=5')
+			commit('SET_CHANNELS', response.data)
+		} catch(e) {
+			// console.log(e);
+		}
 	}
 }

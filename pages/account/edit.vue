@@ -5,7 +5,7 @@
 				<h3 class="m-0 tracking-tight font-medium mb-1 text-lg text-gray-900">Edit your account</h3>
 			</div>
 			<div class="w-full relative">
-				<form action="#" @submit.perevent="saveChanges">
+				<form action="#" @submit.prevent="saveChanges">
 					<div class="mb-4">
 						<label class="block font-medium text-gray-900 text-sm mb-2">Email</label>	
 						<input type="text" name="email" class="block w-full text-sm border border-solid border-gray-200 rounded text-gray-900 bg-white py-2 px-4 appearance-none outline-none transition-color duration-100 ease-in-out placeholder-gray-500" autofocus="autofocus" v-model="form.email" />

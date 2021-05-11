@@ -1,8 +1,5 @@
 <template>
 	<div class="w-full pt-10 md:pt-20 pr-12 pb-5 pl-12 relative">
-		<!-- <template v-if="$fetchState.pending">
-			<UserPageShadow />
-		</template> -->
 		<template v-if="user.name">
 			<div class="w-full relative flex flex-wrap">
 				<div class="w-full mb-8 text-center">
@@ -31,7 +28,7 @@
 							<h3 class="m-0 tracking-tight font-medium mb-1 text-lg text-gray-900">Latest disucssions</h3>
 						</div>
 						<template v-for="discussion in discussions">
-							<Discussion :discussion="discussion" />
+							<Discussion :discussion="discussion" :key="'discussion'+discussion.id" />
 						</template>
 					</div>
 				</template>
@@ -41,7 +38,7 @@
 							<h3 class="m-0 tracking-tight font-medium mb-1 text-lg text-gray-900">Latest posts</h3>
 						</div>
 						<template v-for="post in posts">
-							<div class="mb-4 border px-6 py-4 rounded shadow">
+							<div class="mb-4 border px-6 py-4 rounded shadow" :key="'post'+post.id">
 								<div>{{ post.content.slice(0, 100) }}...</div>
 							</div>
 						</template>
@@ -103,11 +100,6 @@
 				this.loaded.push(load)
 			} catch(e) {
 				//
-			}
-		},
-		activated() {
-			if (this.$fetchState.timestamp <= Date.now() - process.env.CACHE_TIME) {
-				this.$fetch()
 			}
 		},
 		fetchOnServer: false,

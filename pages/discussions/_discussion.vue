@@ -61,12 +61,7 @@
 				}
 			}
 		},
-		activated() {
-			if (this.$fetchState.timestamp <= Date.now() - process.env.CACHE_TIME) {
-				this.$fetch()
-			}
-		},
-		fetchOnServer: true,
+		fetchOnServer: false,
 		methods: {
 			editDiscussion(discussion) {
 				this.discussion = discussion
